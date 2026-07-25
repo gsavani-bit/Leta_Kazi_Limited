@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Leta Kazi Ltd</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+margin:20px;
+background:#f4f4f4;
+}
+
+.dark{
+background:#222;
+color:#fff;
+}
+
+h1{
+text-align:center;
+color:#0066cc;
+}
+
+.box{
+background:#fff;
+padding:15px;
+margin:10px 0;
+border-radius:8px;
+box-shadow:0 2px 5px rgba(0,0,0,0.2);
+}
+
+.dark .box{
+background:#333;
+}
+
+input,select,textarea{
+width:100%;
+padding:8px;
+margin:5px 0;
+box-sizing:border-box;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+textarea{
+height:250px;
+}
+
+button{
+padding:10px;
+margin:5px;
+border:none;
+border-radius:5px;
+color:#fff;
+cursor:pointer;
+}
+
+.green{
+background:green;
+}
+
+.red{
+background:red;
+}
+
+.blue{
+background:#007bff;
+}
+
+.orange{
+background:orange;
+}
+
+.whatsapp{
+background:#25D366;
+}
+
+.black{
+background:#333;
+}
+
+.dark input,
+.dark select,
+.dark textarea{
+background:#444;
+color:#fff;
+border:1px solid #777;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Leta Kazi Ltd</h1>
+
+<button class="black" onclick="darkMode()">Dark Mode</button>
+
+<div class="box">
+
+<label>Date</label>
+<input type="date" id="saleDate">
+
+<label>Customer Name</label>
+<input type="text" id="customer">
+
+<label>TIN No</label>
+<input type="text" id="tin">
+
+<label>Payment Received</label>
+<select id="payment">
+<option>YES</option>
+<option>NO</option>
+</select>
+
+<label>Through</label>
+<input type="text" id="through">
+
+<label>Delivered</label>
+<select id="delivered">
+<option>YES</option>
+<option>NO</option>
+</select>
+
+<label>Order Type</label>
+<select id="order">
+<option>DSM</option>
+<option>MTW</option>
+</select>
+
+</div>
+
+<button class="green" onclick="addProduct()">
++ Add Product
+</button>
+
+<div id="products"></div>
+
+<button class="blue" onclick="generate()">
+Generate Message
+</button>
+
+<textarea id="output"></textarea>
+
+<br>
+
+<button class="orange" onclick="copyMsg()">
+Copy Message
+</button>
+
+<button class="whatsapp" onclick="sendWA()">
+Send WhatsApp
+</button>
+
+<script>
+
+function darkMode(){
+document.body.classList.toggle('dark');
+}
+
+function addProduct(){
+
+var d=document.createElement('div');
+
+d.className='box product';
+
+d.innerHTML=
+
+'<label>Product</label>'+
+
+'<select class="name">'+
+
+'<option value="">Select Product</option>'+
+
+'<option>Dry Bags 1 KG China</option>'+
+'<option>Dry Bags 1 KG India</option>'+
+'<option>Dry Bags 2 KG India V</option>'+
+'<option>Dry Bags 2 KG India S</option>'+
+
+'<option>Threads 1 KG Blue</option>'+
+'<option>Threads 1 KG Green</option>'+
+'<option>Threads 1 KG Yellow</option>'+
+'<option>Threads 1 KG Red</option>'+
+
+'<option>Threads 1 KG White S</option>'+
+'<option>Threads 1 KG White L</option>'+
+
+'<option>Threads 2 KG White</option>'+
+
+'<option>Threads 200 Grams White</option>'+
+'<option>Threads 150 Grams White</option>'+
+
+'<option>Cable Seals</option>'+
+'<option>Plastic Seals</option>'+
+'<option>Bolt Seals</option>'+
+
+'<option>Fumigation Tablets</option>'+
+
+'</select>'+
+
+'<label>Quantity</label>'+
+'<input type="number" class="qty">' +
+
+'<label>Price</label>'+
+'<input type="number" class="price">' +
+
+'<button class="red" onclick="this.parentNode.remove()">Remove Product</button>';
+
+document.getElementById('products').appendChild(d);
+}
+
+function generate(){
+
+var msg='';
+
+msg+='Leta Kazi Ltd\n';
+msg+='Cash Sale\n\n';
+
+msg+='Date: '+document.getElementById('saleDate').value+'\n';
+msg+='Customer Name: '+document.getElementById('customer').value+'\n';
+msg+='TIN No: '+document.getElementById('tin').value+'\n\n';
+
+msg+='Payment Received: '+document.getElementById('payment').value+'\n';
+msg+='Through: '+document.getElementById('through').value+'\n\n';
+
+msg+='Delivered: '+document.getElementById('delivered').value+'\n';
+msg+='Order: '+document.getElementById('order').value+'\n\n';
+
+var items=document.getElementsByClassName('product');
+
+var total=0;
+
+for(var i=0;i<items.length;i++){
+
+var name=items[i].querySelector('.name').value;
+var qty=Number(items[i].querySelector('.qty').value||0);
+var price=Number(items[i].querySelector('.price').value||0);
+
+var value=qty*price;
+
+total+=value;
+
+msg+=(i+1)+') '+name+'\n';
+msg+=qty+' x '+price.toLocaleString()+' = '+value.toLocaleString()+'\n\n';
+
+}
+
+msg+='Total Value: '+total.toLocaleString()+'\n\n';
+
+msg+='Thanks,\n';
+msg+='Leta Kazi Ltd';
+
+document.getElementById('output').value=msg;
+}
+
+function copyMsg(){
+
+generate();
+
+var text=document.getElementById('output');
+
+text.select();
+
+document.execCommand('copy');
+
+alert('Message Copied');
+}
+
+function sendWA(){
+
+generate();
+
+var text=encodeURIComponent(
+document.getElementById('output').value
+);
+
+window.open(
+'https://wa.me/?text='+text,
+'_blank'
+);
+}
+
+window.onload=function(){
+
+addProduct();
+
+var d=new Date();
+
+var m=(d.getMonth()+1).toString().padStart(2,'0');
+var day=d.getDate().toString().padStart(2,'0');
+
+document.getElementById('saleDate').value=
+d.getFullYear()+'-'+m+'-'+day;
+
+}
+</script>
+
+</body>
+</html>
