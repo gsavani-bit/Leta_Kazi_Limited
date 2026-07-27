@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -300,6 +299,6 @@ d.getFullYear()+'-'+m+'-'+day;
 
 }
 </script>
-
+</!DOCTYPE html>
 </body>
 </html>
