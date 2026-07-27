@@ -93,7 +93,7 @@ border:1px solid #777;
 
 <body>
 
-<h1>Leta Kazi Ltd</h1>
+<h1>Cash Register Book</h1>
 
 <button class="black" onclick="darkMode()">Dark Mode</button>
 
@@ -178,6 +178,11 @@ d.innerHTML=
 '<option>Dry Bags 2 KG India V</option>'+
 '<option>Dry Bags 2 KG India S</option>'+
 
+'<option>Kraft Paper - Big Roll Ind</option>'+
+'<option>Kraft Paper - Pcs 40 Ft Container </option>'+
+'<option>Kraft Paper - Pcs 20 Ft Container </option>'+
+'<option>Kraft Paper - Big Roll Tnz</option>'+
+  
 '<option>Threads 1 KG Blue</option>'+
 '<option>Threads 1 KG Green</option>'+
 '<option>Threads 1 KG Yellow</option>'+
