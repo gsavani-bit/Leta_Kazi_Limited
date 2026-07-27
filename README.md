@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -299,6 +299,6 @@ d.getFullYear()+'-'+m+'-'+day;
 
 }
 </script>
-</!DOCTYPE html>
+
 </body>
 </html>
