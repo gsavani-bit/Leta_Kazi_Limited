@@ -209,6 +209,10 @@ d.innerHTML=
 '<label>Price</label>'+
 '<input type="number" class="price">' +
 
+'<label>VAT %</label>'+
+'<input type="number" class="vat" value="18">' +
+  
+  
 '<button class="red" onclick="this.parentNode.remove()">Remove Product</button>';
 
 document.getElementById('products').appendChild(d);
@@ -239,14 +243,24 @@ for(var i=0;i<items.length;i++){
 
 var name=items[i].querySelector('.name').value;
 var qty=Number(items[i].querySelector('.qty').value||0);
+
+
 var price=Number(items[i].querySelector('.price').value||0);
+var vat=Number(items[i].querySelector('.vat').value||0);
 
 var value=qty*price;
+var vatAmount=value*(vat/100);
+var totalWithVat=value+vatAmount;
 
-total+=value;
+total+=totalWithVat;
 
 msg+=(i+1)+') '+name+'\n';
-msg+=qty+' x '+price.toLocaleString()+' = '+value.toLocaleString()+'\n\n';
+msg+='Qty: '+qty+'\n';
+msg+='Price: '+price.toLocaleString()+'\n';
+msg+='Value: '+value.toLocaleString()+'\n';
+msg+='VAT ('+vat+'%): '+vatAmount.toLocaleString()+'\n';
+msg+='Total: '+totalWithVat.toLocaleString()+'\n\n';
+
 
 }
 
