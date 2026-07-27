@@ -52,7 +52,7 @@ padding:10px;
 margin:5px;
 border:none;
 border-radius:5px;
-color:#fff;
+color:white;
 cursor:pointer;
 }
 
@@ -128,6 +128,14 @@ border:1px solid #777;
 <option>MTW</option>
 </select>
 
+<label>
+<input type="checkbox" id="applyVat" checked style="width:auto;">
+ Apply VAT
+</label>
+
+<label>VAT Percentage (%)</label>
+<input type="number" id="vatPercent" value="18">
+
 </div>
 
 <button class="green" onclick="addProduct()">
@@ -178,10 +186,10 @@ d.innerHTML=
 '<option>Dry Bags 2 KG India S</option>'+
 
 '<option>Kraft Paper - Big Roll Ind</option>'+
-'<option>Kraft Paper - Pcs 40 Ft Container </option>'+
-'<option>Kraft Paper - Pcs 20 Ft Container </option>'+
+'<option>Kraft Paper - Pcs 40 Ft Container</option>'+
+'<option>Kraft Paper - Pcs 20 Ft Container</option>'+
 '<option>Kraft Paper - Big Roll Tnz</option>'+
-  
+
 '<option>Threads 1 KG Blue</option>'+
 '<option>Threads 1 KG Green</option>'+
 '<option>Threads 1 KG Yellow</option>'+
@@ -231,31 +239,70 @@ msg+='Through: '+document.getElementById('through').value+'\n\n';
 msg+='Delivered: '+document.getElementById('delivered').value+'\n';
 msg+='Order: '+document.getElementById('order').value+'\n\n';
 
-var items=document.getElementsByClassName('product');
+var applyVat =
+document.getElementById('applyVat').checked;
 
-var total=0;
+var vatPercent =
+Number(document.getElementById('vatPercent').value || 0);
+
+var items =
+document.getElementsByClassName('product');
+
+var total = 0;
 
 for(var i=0;i<items.length;i++){
 
-var name=items[i].querySelector('.name').value;
-var qty=Number(items[i].querySelector('.qty').value||0);
-var price=Number(items[i].querySelector('.price').value||0);
+var name =
+items[i].querySelector('.name').value;
 
-var value=qty*price;
+var qty =
+Number(items[i].querySelector('.qty').value || 0);
 
-total+=value;
+var price =
+Number(items[i].querySelector('.price').value || 0);
 
-msg+=(i+1)+') '+name+'\n';
-msg+=qty+' x '+price.toLocaleString()+' = '+value.toLocaleString()+'\n\n';
+var value = qty * price;
+
+if(applyVat){
+
+var vatAmount =
+value * (vatPercent/100);
+
+var lineTotal =
+value + vatAmount;
+
+total += lineTotal;
+
+msg += (i+1)+') '+name+'\n';
+msg += qty+' x '+price.toLocaleString()+' = '+value.toLocaleString()+'\n';
+msg += 'VAT ('+vatPercent+'%): '+vatAmount.toLocaleString()+'\n';
+msg += 'Total: '+lineTotal.toLocaleString()+'\n\n';
+
+}else{
+
+total += value;
+
+msg += (i+1)+') '+name+'\n';
+msg += qty+' x '+price.toLocaleString()+' = '+value.toLocaleString()+'\n\n';
 
 }
 
-msg+='Total Value: '+total.toLocaleString()+'\n\n';
+}
 
-msg+='Thanks,\n';
-msg+='Leta Kazi Ltd';
+if(applyVat){
 
-document.getElementById('output').value=msg;
+msg += 'Grand Total (Incl. VAT): '+total.toLocaleString()+'\n\n';
+
+}else{
+
+msg += 'Total Value: '+total.toLocaleString()+'\n\n';
+
+}
+
+msg += 'Thanks,\n';
+msg += 'Leta Kazi Ltd';
+
+document.getElementById('output').value = msg;
 }
 
 function copyMsg(){
@@ -301,4 +348,4 @@ d.getFullYear()+'-'+m+'-'+day;
 </script>
 
 </body>
-</html>I would like to add VAT with price input column, 
+</html>
