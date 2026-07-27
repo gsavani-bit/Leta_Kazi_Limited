@@ -248,23 +248,32 @@ var qty=Number(items[i].querySelector('.qty').value||0);
 var price=Number(items[i].querySelector('.price').value||0);
 var vat=Number(items[i].querySelector('.vat').value||0);
 
-var value=qty*price;
-var vatAmount=value*(vat/100);
-var totalWithVat=value+vatAmount;
+var value = qty * price;
 
-total+=totalWithVat;
+if(applyVat){
 
-msg+=(i+1)+') '+name+'\n';
-msg+='Qty: '+qty+'\n';
-msg+='Price: '+price.toLocaleString()+'\n';
-msg+='Value: '+value.toLocaleString()+'\n';
-msg+='VAT ('+vat+'%): '+vatAmount.toLocaleString()+'\n';
-msg+='Total: '+totalWithVat.toLocaleString()+'\n\n';
+    var vatAmount = value * 0.18;
 
+    var lineTotal = value + vatAmount;
 
+    total += lineTotal;
+
+    msg += (i+1)+') '+name+'\n';
+    msg += qty+' x '+price.toLocaleString()+
+           ' = '+value.toLocaleString()+'\n';
+    msg += 'VAT (18%): '+
+           vatAmount.toLocaleString()+'\n';
+    msg += 'Total: '+
+           lineTotal.toLocaleString()+'\n\n';
+
+}else{
+
+    total += value;
+
+    msg += (i+1)+') '+name+'\n';
+    msg += qty+' x '+price.toLocaleString()+
+           ' = '+value.toLocaleString()+'\n\n';
 }
-
-msg+='Total Value: '+total.toLocaleString()+'\n\n';
 
 msg+='Thanks,\n';
 msg+='Leta Kazi Ltd';
