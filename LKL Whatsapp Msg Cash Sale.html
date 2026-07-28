@@ -186,8 +186,8 @@ d.innerHTML=
 '<option>Dry Bags 2 KG India S</option>'+
 
 '<option>Kraft Paper - Big Roll Ind</option>'+
-'<option>Kraft Paper - Pcs 40 Ft Container</option>'+
-'<option>Kraft Paper - Pcs 20 Ft Container</option>'+
+'<option>Kraft Paper - Pcs 40 Ft Container (15.5 Kg)</option>'+
+'<option>Kraft Paper - Pcs 20 Ft Container ( 8.5 Kg)</option>'+
 '<option>Kraft Paper - Big Roll Tnz</option>'+
 
 '<option>Threads 1 KG Blue</option>'+
@@ -203,11 +203,18 @@ d.innerHTML=
 '<option>Threads 200 Grams White</option>'+
 '<option>Threads 150 Grams White</option>'+
 
+ '<option>Sewing Machine (CH)</option>'+
+ '<option>Sewing Machine (IN)</option>'+
+ '<option>Sewing Machine (Needles)</option>'+
+
 '<option>Cable Seals</option>'+
 '<option>Plastic Seals</option>'+
 '<option>Bolt Seals</option>'+
 
 '<option>Fumigation Tablets</option>'+
+'<option>Fumigation Tablets Alutabs 57%</option>'+
+'<option>Fumigation Tablets Equtoxin 56%</option>'+
+'<option>Fumigation Tablets Fastphos 56%</option>'+
 
 '</select>'+
 
