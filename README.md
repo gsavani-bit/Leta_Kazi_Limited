@@ -130,7 +130,7 @@ border:1px solid #777;
 
 <label>
 <input type="checkbox" id="applyVat" checked style="width:auto;">
- Apply VAT
+Apply
 </label>
 
 <label>VAT Percentage (%)</label>
